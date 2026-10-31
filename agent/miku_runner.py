@@ -1,19 +1,20 @@
-"""本地任务执行器：监听 E:\\miku\\tasks 里的 .task 文件，执行命令并写结果。
+"""本地任务执行器：监听 MIKU_TASKS_DIR（默认 ./tasks）里的 .task 文件，执行命令并写结果。
 
 启动后常驻，不弹窗、不抢焦点。
 任务文件格式（JSON）：
-    {"id": "abc123", "cmd": "...", "cwd": "E:\\\\miku", "timeout": 600}
+    {"id": "abc123", "cmd": "...", "cwd": ".", "timeout": 600}
 结果写到同目录 <id>.result.json，日志写到 <id>.log
 """
 
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import time
 from pathlib import Path
 
-TASKS = Path(os.environ.get("MIKU_TASKS_DIR", r"E:\miku\tasks"))
+TASKS = Path(os.environ.get("MIKU_TASKS_DIR", "tasks"))
 DONE = TASKS / "done"
 POLL = 2.0
 
