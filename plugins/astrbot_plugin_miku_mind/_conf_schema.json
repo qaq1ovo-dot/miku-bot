@@ -1,0 +1,47 @@
+{
+    "enable": {
+        "type": "bool",
+        "description": "启用内心活动",
+        "default": true
+    },
+    "random": {
+        "type": "bool",
+        "description": "随机时间（开启后忽略固定时间点）",
+        "default": true
+    },
+    "count_min": {
+        "type": "int",
+        "description": "每天最少想几次",
+        "default": 2
+    },
+    "count_max": {
+        "type": "int",
+        "description": "每天最多想几次",
+        "default": 6
+    },
+    "random_window": {
+        "type": "string",
+        "description": "随机时间范围",
+        "default": "00:00-23:59",
+        "hint": "格式 起始-结束；默认全天，半夜也会想"
+    },
+    "think_times": {
+        "type": "list",
+        "description": "固定时间点（random 关闭时生效）",
+        "default": [
+            "09:00",
+            "15:00",
+            "22:00"
+        ]
+    },
+    "inject": {
+        "type": "bool",
+        "description": "把最近的想法注入对话上下文",
+        "default": true
+    },
+    "target_umo": {
+        "type": "string",
+        "description": "主动说话的会话（留空=不主动发）",
+        "default": ""
+    }
+}

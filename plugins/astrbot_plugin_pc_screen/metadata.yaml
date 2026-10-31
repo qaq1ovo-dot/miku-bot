@@ -1,0 +1,5 @@
+name: astrbot_plugin_pc_screen
+desc: 看屏幕 / 点鼠标 / 敲键盘（仅私聊）
+author: dsh
+version: 3.4.0
+version_check: false

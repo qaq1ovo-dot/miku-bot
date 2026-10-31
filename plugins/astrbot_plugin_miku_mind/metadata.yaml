@@ -1,0 +1,5 @@
+name: astrbot_plugin_miku_mind
+desc: 内心独白 / 复盘 / 自发开口
+author: dsh
+version: 1.2.0
+version_check: false

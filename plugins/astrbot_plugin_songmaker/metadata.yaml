@@ -1,0 +1,5 @@
+name: astrbot_plugin_songmaker
+desc: 自己写歌并生成 VOCALOID 工程
+author: dsh
+version: 5.1.0
+version_check: false

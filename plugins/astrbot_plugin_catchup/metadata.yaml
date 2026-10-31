@@ -1,0 +1,6 @@
+name: astrbot_plugin_catchup
+display_name: 掉线补偿
+desc: 掉线重连后，检查这段时间漏掉的消息并补回复
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_catchup

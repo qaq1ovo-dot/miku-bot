@@ -1,0 +1,5 @@
+name: astrbot_plugin_miku_pet
+desc: 把 QQ 里初音的回复转发到本地桌宠，让桌宠同步「说」同一句话。
+author: dsh
+version: 1.0.0
+repo: https://example.invalid/local

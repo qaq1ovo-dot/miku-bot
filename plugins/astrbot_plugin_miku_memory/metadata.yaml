@@ -1,0 +1,5 @@
+name: astrbot_plugin_miku_memory
+desc: 长期记忆（抽取事实并按相关度注入）
+author: dsh
+version: 1.0.0
+version_check: false

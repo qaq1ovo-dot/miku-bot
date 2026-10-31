@@ -1,0 +1,27 @@
+{
+    "owner_ids": {
+        "type": "list",
+        "description": "允许使用做歌/导出/中断/预览的 QQ 号",
+        "default": []
+    },
+    "auto_song": {
+        "type": "bool",
+        "description": "允许她自己主动写歌发给你",
+        "default": true
+    },
+    "auto_min_hours": {
+        "type": "float",
+        "description": "最短间隔（小时）",
+        "default": 6
+    },
+    "auto_max_hours": {
+        "type": "float",
+        "description": "最长间隔（小时）",
+        "default": 14
+    },
+    "target_umo": {
+        "type": "string",
+        "description": "主动发歌的会话",
+        "default": ""
+    }
+}

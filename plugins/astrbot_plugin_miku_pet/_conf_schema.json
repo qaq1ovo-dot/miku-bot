@@ -1,0 +1,36 @@
+{
+  "enabled": {
+    "type": "bool",
+    "description": "启用桌宠同步",
+    "default": true,
+    "hint": "开启后，QQ 里初音的每条回复都会推送到本地桌宠"
+  },
+  "pet_url": {
+    "type": "string",
+    "description": "桌宠接口地址",
+    "default": "http://127.0.0.1:19882/say",
+    "hint": "通过 SSH 反向隧道映射到服务器 127.0.0.1:19882"
+  },
+  "group_whitelist": {
+    "type": "list",
+    "description": "生效的群号（留空=全部群）",
+    "default": [],
+    "hint": "只在这些群里把回复同步给桌宠"
+  },
+  "sync_private": {
+    "type": "bool",
+    "description": "同步私聊",
+    "default": true
+  },
+  "max_chars": {
+    "type": "int",
+    "description": "推送文本最大长度",
+    "default": 200,
+    "hint": "太长的回复截断，避免桌宠气泡溢出"
+  },
+  "timeout_seconds": {
+    "type": "float",
+    "description": "请求超时（秒）",
+    "default": 3.0
+  }
+}

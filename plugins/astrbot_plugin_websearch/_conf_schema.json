@@ -1,0 +1,26 @@
+{
+  "enable": {
+    "description": "启用联网搜索",
+    "type": "bool",
+    "hint": "关掉后她就不会调用搜索工具",
+    "default": true
+  },
+  "engine": {
+    "description": "搜索引擎",
+    "type": "string",
+    "hint": "bing 或 baidu",
+    "default": "bing"
+  },
+  "max_results": {
+    "description": "默认返回条数",
+    "type": "int",
+    "hint": "1~8，默认 5",
+    "default": 5
+  },
+  "fetch_chars": {
+    "description": "读网页时最多返回多少字",
+    "type": "int",
+    "hint": "默认 2500",
+    "default": 2500
+  }
+}

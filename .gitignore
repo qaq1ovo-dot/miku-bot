@@ -1,0 +1,41 @@
+# 密钥与本地配置
+.env
+*.env
+config.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行时数据
+*.log
+*.jsonl
+logs/
+data/
+facts.jsonl
+state.json
+buffer.jsonl
+pending.jsonl
+
+# 音视频与模型（体积大，不入库）
+*.wav
+*.mp3
+*.flac
+*.m4s
+*.mp4
+*.vpr
+*.vsqx
+*.pth
+*.safetensors
+*.ckpt
+*.onnx
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

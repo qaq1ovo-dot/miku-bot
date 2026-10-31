@@ -1,0 +1,6 @@
+name: astrbot_plugin_websearch
+display_name: 联网搜索
+desc: 让初音能搜网页、读网页正文（Bing/百度，无需 API key）
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_websearch

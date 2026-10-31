@@ -1,0 +1,38 @@
+{
+    "enable": {
+        "description": "启用掉线补偿",
+        "type": "bool",
+        "hint": "重连后自动补回漏掉的消息",
+        "default": true
+    },
+    "owner_id": {
+        "description": "补回复的私聊对象 QQ",
+        "type": "string",
+        "hint": "留空则使用下面 session_list 里的会话",
+        "default": ""
+    },
+    "session_list": {
+        "description": "要补偿的会话（UMO 列表）",
+        "type": "list",
+        "hint": "例如 napcat:FriendMessage:123456789",
+        "default": []
+    },
+    "max_replies": {
+        "description": "每次最多补几条",
+        "type": "int",
+        "hint": "避免一次刷屏，默认 2",
+        "default": 2
+    },
+    "max_gap_minutes": {
+        "description": "只补最近多少分钟内的",
+        "type": "int",
+        "hint": "默认 720（12 小时）",
+        "default": 720
+    },
+    "history_count": {
+        "description": "拉取多少条历史消息",
+        "type": "int",
+        "hint": "默认 30",
+        "default": 30
+    }
+}

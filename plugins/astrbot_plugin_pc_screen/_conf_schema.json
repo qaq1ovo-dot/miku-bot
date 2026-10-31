@@ -1,0 +1,38 @@
+{
+    "agent_url": {
+        "type": "string",
+        "description": "pc_agent 地址（不含路径）",
+        "default": "http://127.0.0.1:19883"
+    },
+    "token": {
+        "type": "string",
+        "description": "鉴权 token",
+        "default": ""
+    },
+    "owner_ids": {
+        "type": "list",
+        "description": "允许使用的主人 QQ 号",
+        "default": [],
+        "hint": "留空=所有人都能用（不建议）"
+    },
+    "vision_api_key": {
+        "type": "string",
+        "description": "视觉模型 API Key（用于描述截图内容）",
+        "default": ""
+    },
+    "vision_url": {
+        "type": "string",
+        "description": "视觉模型接口地址",
+        "default": "https://api.deepseek.com/chat/completions"
+    },
+    "vision_model": {
+        "type": "string",
+        "description": "视觉模型名",
+        "default": "deepseek-flash"
+    },
+    "timeout_seconds": {
+        "type": "float",
+        "description": "请求超时（秒）",
+        "default": 15.0
+    }
+}
