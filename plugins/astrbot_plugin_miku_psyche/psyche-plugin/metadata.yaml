@@ -1,6 +1,0 @@
-name: astrbot_plugin_miku_psyche
-display_name: 情绪状态
-desc: 给初音一套会自己变化的情绪与需求，并注入到每次对话中
-version: 1.0.0
-author: dsh
-repo: https://github.com/dsh/astrbot_plugin_miku_psyche

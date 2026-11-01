@@ -22,5 +22,11 @@
     "type": "float",
     "hint": "越大越粘人，默认 1.0",
     "default": 1.0
+  },
+  "social_rise_per_hour": {
+    "description": "没人陪时想说话的增速（每小时）",
+    "type": "float",
+    "hint": "越大越黏人，0.18 表示约 3 小时后会想找人说话",
+    "default": 0.18
   }
 }

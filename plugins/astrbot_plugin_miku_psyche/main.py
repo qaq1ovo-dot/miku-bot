@@ -75,20 +75,31 @@ class PsychePlugin(Star):
             logger.warning("[psyche] 保存失败")
 
     def _decay(self, state: dict) -> dict:
-        """按经过的时间把状态拉回基线。"""
+        """按经过的时间调整状态。
+
+        social（社交欲）单独处理：它只会随时间**上涨**，不向基线回落。
+        道理很直白——没人陪着说话，只会越来越想，不会越来越淡。
+        """
         now = time.time()
         last = float(state.get("ts") or now)
         hours = max(0.0, (now - last) / 3600.0)
         if hours <= 0:
             return state
+
         boost = float(self.config.get("social_decay_boost", 1.0) or 1.0)
+        rise = float(self.config.get("social_rise_per_hour", 0.18) or 0.18)
+
         for key, rate in DECAY.items():
+            if key == "social":
+                continue
             base = BASELINE[key]
-            delta = rate * hours * (boost if key == "social" else 1.0)
-            value = float(state.get(key, base)) + delta
-            # 向基线缓慢回归
+            value = float(state.get(key, base)) + rate * hours
             value += (base - value) * min(1.0, 0.15 * hours)
             state[key] = _clamp(value, -1.0 if key == "valence" else 0.0, 1.0)
+
+        social = float(state.get("social", BASELINE["social"]))
+        social += rise * hours * boost
+        state["social"] = _clamp(social)
         return state
 
     async def _decay_loop(self) -> None:

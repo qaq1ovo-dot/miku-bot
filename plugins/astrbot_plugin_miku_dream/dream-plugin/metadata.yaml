@@ -1,6 +1,0 @@
-name: astrbot_plugin_miku_dream
-display_name: 做梦
-desc: 长时间没说话会睡着，醒来时用最近的记忆拼一个梦
-version: 1.0.0
-author: dsh
-repo: https://github.com/dsh/astrbot_plugin_miku_dream
