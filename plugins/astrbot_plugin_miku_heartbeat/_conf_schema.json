@@ -1,0 +1,44 @@
+{
+  "enable": {
+    "description": "启用心跳",
+    "type": "bool",
+    "hint": "关掉后她不会自己动",
+    "default": true
+  },
+  "interval_minutes": {
+    "description": "心跳间隔（分钟）",
+    "type": "int",
+    "hint": "默认 20",
+    "default": 20
+  },
+  "max_actions_per_day": {
+    "description": "每天最多自己行动几次",
+    "type": "int",
+    "hint": "防止刷屏，默认 10",
+    "default": 10
+  },
+  "urge_threshold": {
+    "description": "行动阈值",
+    "type": "float",
+    "hint": "冲动值超过它才行动，0.3~0.9，默认 0.55",
+    "default": 0.55
+  },
+  "pet_endpoint": {
+    "description": "桌宠地址",
+    "type": "string",
+    "hint": "只想写日记不想打扰桌面就留空",
+    "default": "http://127.0.0.1:19890"
+  },
+  "pet_token": {
+    "description": "桌宠 token",
+    "type": "string",
+    "hint": "与桌宠配置一致",
+    "default": ""
+  },
+  "desktop_bubble": {
+    "description": "允许在桌面冒气泡",
+    "type": "bool",
+    "hint": "关掉就只写进日记",
+    "default": true
+  }
+}

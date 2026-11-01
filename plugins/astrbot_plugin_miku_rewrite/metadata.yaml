@@ -1,0 +1,6 @@
+name: astrbot_plugin_miku_rewrite
+display_name: 自我改写
+desc: 她可以提出修改自己行为准则和性格参数的申请，由主人批准后生效
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_miku_rewrite

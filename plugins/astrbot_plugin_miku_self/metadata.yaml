@@ -1,0 +1,6 @@
+name: astrbot_plugin_miku_self
+display_name: 自我叙事
+desc: 每天把当天发生的事压缩成一段第一人称自述，沉淀成稳定的「我是谁」
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_miku_self

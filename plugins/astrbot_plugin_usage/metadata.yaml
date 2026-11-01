@@ -1,0 +1,6 @@
+name: astrbot_plugin_usage
+display_name: 用量统计
+desc: 统计 LLM token 消耗并折算金额，接近预算时提醒
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_usage

@@ -1,0 +1,26 @@
+{
+  "enable": {
+    "description": "启用经验学习",
+    "type": "bool",
+    "hint": "从你的纠正里总结规则",
+    "default": true
+  },
+  "inject_limit": {
+    "description": "每次注入几条经验",
+    "type": "int",
+    "hint": "默认 3，太多会干扰",
+    "default": 3
+  },
+  "confirm_times": {
+    "description": "同一规则出现几次算确认",
+    "type": "int",
+    "hint": "默认 3 次才固化成正式规则",
+    "default": 3
+  },
+  "auto_learn": {
+    "description": "自动总结纠正",
+    "type": "bool",
+    "hint": "检测到纠正语气时调用一次小模型总结规则（每次约 0.003 元）",
+    "default": true
+  }
+}

@@ -1,5 +1,5 @@
 name: astrbot_plugin_miku_memory
-desc: 长期记忆（抽取事实并按相关度注入）
+desc: 长期记忆：抽取事实，用 BM25 检索注入，不重要的会慢慢淡忘
 author: dsh
-version: 1.0.0
+version: 2.1.0
 version_check: false

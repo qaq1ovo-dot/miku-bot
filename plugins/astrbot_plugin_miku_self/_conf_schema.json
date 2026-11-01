@@ -1,0 +1,32 @@
+{
+  "enable": {
+    "description": "启用自我叙事",
+    "type": "bool",
+    "hint": "每天写一段“今天的我”，并注入到之后所有对话",
+    "default": true
+  },
+  "hour": {
+    "description": "每天几点总结",
+    "type": "int",
+    "hint": "0~23，默认 23",
+    "default": 23
+  },
+  "minute": {
+    "description": "几点几分",
+    "type": "int",
+    "hint": "默认 30",
+    "default": 30
+  },
+  "inject": {
+    "description": "把自我认知注入对话",
+    "type": "bool",
+    "hint": "让她在聊天时知道自己是个什么样的人",
+    "default": true
+  },
+  "keep_days": {
+    "description": "保留最近几天的自述",
+    "type": "int",
+    "hint": "默认 7",
+    "default": 7
+  }
+}

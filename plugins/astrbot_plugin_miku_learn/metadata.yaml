@@ -1,0 +1,6 @@
+name: astrbot_plugin_miku_learn
+display_name: 经验学习
+desc: 从你的纠正和反馈里学出行为规则，下次生成前注入
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_miku_learn

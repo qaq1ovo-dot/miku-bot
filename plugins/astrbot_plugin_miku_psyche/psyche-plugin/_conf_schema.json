@@ -1,0 +1,32 @@
+{
+  "enable": {
+    "description": "启用情绪状态",
+    "type": "bool",
+    "hint": "关掉后她不再有情绪起伏",
+    "default": true
+  },
+  "inject_prompt": {
+    "description": "把状态注入对话",
+    "type": "bool",
+    "hint": "让她说话时感知到自己现在的心情",
+    "default": true
+  },
+  "decay_minutes": {
+    "description": "状态衰减的步长（分钟）",
+    "type": "int",
+    "hint": "每隔多久自动回归平静，默认 30",
+    "default": 30
+  },
+  "social_decay_boost": {
+    "description": "没人理时想说话的增速",
+    "type": "float",
+    "hint": "越大越粘人，默认 1.0",
+    "default": 1.0
+  },
+  "social_rise_per_hour": {
+    "description": "没人陪时想说话的增速（每小时）",
+    "type": "float",
+    "hint": "越大越黏人，0.18 表示约 3 小时后会想找人说话",
+    "default": 0.18
+  }
+}

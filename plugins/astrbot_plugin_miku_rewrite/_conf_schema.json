@@ -1,0 +1,32 @@
+{
+  "enable": {
+    "description": "启用自我改写",
+    "type": "bool",
+    "hint": "允许她提出修改自己的申请",
+    "default": true
+  },
+  "allow_tools": {
+    "description": "允许她主动提交申请",
+    "type": "bool",
+    "hint": "关掉后只有你命令才能改",
+    "default": true
+  },
+  "max_overlay_chars": {
+    "description": "行为准则最多多少字",
+    "type": "int",
+    "hint": "防止越改越长，默认 1200",
+    "default": 1200
+  },
+  "max_pending": {
+    "description": "最多保留几条待批申请",
+    "type": "int",
+    "hint": "超出会丢弃最旧的，默认 10",
+    "default": 10
+  },
+  "auto_from_lessons": {
+    "description": "从经验自动升级",
+    "type": "bool",
+    "hint": "同一经验出现 5 次以上时，自动生成一条改写申请",
+    "default": true
+  }
+}

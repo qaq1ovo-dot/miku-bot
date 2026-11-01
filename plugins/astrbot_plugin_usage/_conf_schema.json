@@ -1,0 +1,32 @@
+{
+  "budget": {
+    "description": "本期预算（元）",
+    "type": "float",
+    "hint": "超出八成会提醒你，默认 100",
+    "default": 100.0
+  },
+  "price_in": {
+    "description": "输入价格（元 / 百万 tokens）",
+    "type": "float",
+    "hint": "按你用的模型填，默认 2.0",
+    "default": 2.0
+  },
+  "price_out": {
+    "description": "输出价格（元 / 百万 tokens）",
+    "type": "float",
+    "hint": "默认 8.0",
+    "default": 8.0
+  },
+  "warn_ratio": {
+    "description": "提醒阈值",
+    "type": "float",
+    "hint": "消耗达到预算的这个比例时提醒，默认 0.6（60%）",
+    "default": 0.6
+  },
+  "owner_id": {
+    "description": "提醒发给谁",
+    "type": "string",
+    "hint": "填 QQ 号；留空则只写日志",
+    "default": ""
+  }
+}

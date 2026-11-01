@@ -1,0 +1,44 @@
+{
+  "pet": {
+    "asset_dir": "assets/pets/miku_pixel",
+    "scale": 1.0,
+    "start_pos": [
+      1400,
+      700
+    ],
+    "always_on_top": true,
+    "click_through": false
+  },
+  "api": {
+    "host": "127.0.0.1",
+    "port": 9890,
+    "token": "change-me"
+  },
+  "tts": {
+    "enable": false,
+    "endpoint": "http://127.0.0.1:9880/tts",
+    "ref_audio": "",
+    "ref_text": "",
+    "text_lang": "ja"
+  },
+  "llm": {
+    "base_url": "https://api.deepseek.com",
+    "api_key": "",
+    "model": "deepseek-chat",
+    "system_prompt": "你叫初音未来，是个有点傲娇但很黏人的虚拟女孩。说话简短自然，不要长篇大论。",
+    "temperature": 0.8,
+    "max_tokens": 200,
+    "history_turns": 6
+  },
+  "behavior": {
+    "idle_to_sleep_sec": 1800,
+    "bubble_sec": 6,
+    "talking_sec": 0
+  },
+  "chat": {
+    "backend": "bot",
+    "endpoint": "http://127.0.0.1:19891",
+    "token": "",
+    "timeout": 90
+  }
+}

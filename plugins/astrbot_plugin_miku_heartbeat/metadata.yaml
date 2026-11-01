@@ -1,0 +1,6 @@
+name: astrbot_plugin_miku_heartbeat
+display_name: 心跳
+desc: 定期自检：按情绪和空闲程度决定要不要自己说点什么、想点什么
+version: 1.0.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_miku_heartbeat

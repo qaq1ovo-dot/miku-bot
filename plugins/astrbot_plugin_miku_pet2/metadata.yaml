@@ -1,0 +1,6 @@
+name: astrbot_plugin_miku_pet2
+display_name: 桌宠桥接 v2
+desc: 双向桥接：把回复推给桌宠，也接收桌宠发来的消息；同步情绪状态
+version: 2.1.0
+author: dsh
+repo: https://github.com/dsh/astrbot_plugin_miku_pet2

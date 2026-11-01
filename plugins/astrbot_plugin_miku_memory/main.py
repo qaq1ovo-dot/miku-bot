@@ -17,7 +17,7 @@ from astrbot.api import logger
 from astrbot.api.event import AstrMessageEvent, filter
 from astrbot.api.star import Context, Star, register
 
-DATA = Path(StarTools.get_data_dir("miku_memory"))
+DATA = Path(r"C:\dsh\ws\astrbot\AstrBot-master\data\plugin_data\miku_memory")
 FACTS = DATA / "facts.jsonl"
 PENDING = DATA / "pending.jsonl"
 
@@ -38,16 +38,31 @@ FORGET_AFTER_DAYS = 3.0
 FORGET_BELOW = 0.12
 
 
+def _tokenize(text: str) -> list[str]:
+    """中文用 jieba 分词，英文/数字按词切，保留单字作为补充。"""
+    text = (text or "").strip().lower()
+    if not text:
+        return []
+    tokens: list[str] = []
+    try:
+        import jieba
+
+        tokens = [w for w in jieba.lcut(text) if len(w) >= 2 or (w.strip() and w not in _STOP)]
+    except Exception:  # noqa: BLE001
+        tokens = [w for w in re.findall(r"[a-z0-9_]{2,}|[\u4e00-\u9fff]+", text)]
+    tokens = [t for t in tokens if t.strip() and t not in _STOP]
+    # 补充中文二元组，缓解分词不一致导致的漏召回
+    cjk = "".join(c for c in text if "\u4e00" <= c <= "\u9fff")
+    tokens += [cjk[i:i + 2] for i in range(len(cjk) - 1)]
+    return tokens or [text]
+
+
 def _keywords(text: str) -> set[str]:
-    """粗粒度关键词：中文按字 2-gram，英文按单词。"""
-    text = re.sub(r"[^\w\u4e00-\u9fff]+", " ", text or "")
-    words = {w.lower() for w in re.findall(r"[a-zA-Z0-9_]{2,}", text)}
-    chars = [c for c in re.sub(r"[a-zA-Z0-9_\s]", "", text) if c not in _STOP]
-    grams = {"".join(chars[i:i + 2]) for i in range(len(chars) - 1)}
-    return words | grams
+    """兼容旧代码：粗粒度关键词集合。"""
+    return set(_tokenize(text))
 
 
-@register("astrbot_plugin_miku_memory", "dsh", "长期记忆", "2.0.0")
+@register("astrbot_plugin_miku_memory", "dsh", "长期记忆（BM25 检索）", "2.1.0")
 class MemoryPlugin(Star):
     def __init__(self, context: Context, config: dict | None = None) -> None:
         super().__init__(context)
@@ -81,11 +96,30 @@ class MemoryPlugin(Star):
                 text = " ".join(str(text).split())
                 if not text or text in existing:
                     continue
+                if self._is_duplicate(text):
+                    continue
                 fh.write(json.dumps({"ts": now, "time": stamp, "text": text,
                                      "imp": float(imp)}, ensure_ascii=False) + "\n")
                 existing.add(text)
                 added += 1
         return added
+
+    def _is_duplicate(self, text: str) -> bool:
+        """近似重复判断：分词后 Jaccard ≥ 0.75 视为同一条。"""
+        new = set(_tokenize(text))
+        if not new:
+            return False
+        for f in self._load():
+            old_text = str(f.get("text") or "")
+            old = set(_tokenize(old_text))
+            if not old:
+                continue
+            inter = len(new & old)
+            union = len(new | old)
+            if union and inter / union >= 0.75:
+                logger.debug("[memory] 合并近似重复：%s ≈ %s", text[:20], old_text[:20])
+                return True
+        return False
 
     def _ingest_pending(self) -> int:
         """吸收外部插件投递的记忆（QQ空间说说等）。"""
@@ -151,30 +185,56 @@ class MemoryPlugin(Star):
         return dropped
 
     def _recall(self, query: str, limit: int = 5) -> list[str]:
-        """按关键词重合度 + 重要性 + 时间衰减打分，取前几条。"""
+        """BM25 检索：分词后的词频权重 + 重要性 + 时间衰减。"""
         facts = self._load()
         if not facts or not query:
             return []
-        q = _keywords(query)
-        if not q:
+        q_tokens = _tokenize(query)
+        if not q_tokens:
             return []
+
+        # 逐条分词，统计文档频率
+        docs: list[tuple[dict, list[str]]] = []
+        df: dict[str, int] = {}
+        for f in facts:
+            tokens = _tokenize(str(f.get("text", "")))
+            if not tokens:
+                continue
+            docs.append((f, tokens))
+            for t in set(tokens):
+                df[t] = df.get(t, 0) + 1
+        if not docs:
+            return []
+
+        n_docs = len(docs)
+        avg_len = sum(len(t) for _f, t in docs) / n_docs
+        k1, b = 1.5, 0.75
         now = time.time()
         scored = []
-        for f in facts:
-            fk = _keywords(f.get("text", ""))
-            if not fk:
-                continue
-            overlap = len(q & fk)
-            if overlap == 0:
+
+        for f, tokens in docs:
+            tf: dict[str, int] = {}
+            for t in tokens:
+                tf[t] = tf.get(t, 0) + 1
+            dl = len(tokens)
+            bm25 = 0.0
+            for t in set(q_tokens):
+                if t not in tf:
+                    continue
+                idf = math.log(1 + (n_docs - df[t] + 0.5) / (df[t] + 0.5))
+                denom = tf[t] + k1 * (1 - b + b * dl / max(1.0, avg_len))
+                bm25 += idf * tf[t] * (k1 + 1) / max(1e-6, denom)
+            if bm25 <= 0:
                 continue
             age_days = max(0.0, (now - float(f.get("ts", now))) / 86400)
             decay = math.exp(-age_days / HALF_LIFE_DAYS)
-            score = overlap * (0.4 + float(f.get("imp", 0.5))) * decay
+            score = bm25 * (0.4 + float(f.get("imp", 0.5))) * decay
             shown = f.get("text", "")
             thought = str(f.get("thought") or "").strip()
             if thought:
                 shown = f"{shown}（当时想的是：{thought}）"
             scored.append((score, shown))
+
         scored.sort(key=lambda kv: kv[0], reverse=True)
         return [t for _s, t in scored[:limit]]
 
